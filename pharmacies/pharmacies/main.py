@@ -3,6 +3,7 @@
 from flask import Flask, jsonify
 from flask import Response
 from .ext import database2
+from .blueprint.v1 import resources
 # from .ext import doc_swagger
 
 from .models.core import PatientsModel, PatientsSchema, PharmaciesSchema, TransactionsModel, TransactionsSchema, UsersModel, PharmaciesModel, UsersSchema
@@ -18,15 +19,16 @@ def create_app():
     
     
     app = Flask(__name__)
+    resources.init_app(app)
+
     # cors.init_app(app)
-    # resources.init_app(app)
     app.config['JSON_AS_ASCII'] = False
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db = database2.SessionLocal()
     
 
 
-    return app
+    return app 
 
 #----------------------------------------------------------------------------#
 
