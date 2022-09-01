@@ -1,8 +1,6 @@
 from ..ext.database2 import Base
-
-from sqlalchemy import Column, Integer
-from sqlalchemy.sql.sqltypes import Boolean, DateTime, Float, String, DateTime
-
+from sqlalchemy import Column, Integer, ForeignKey
+from sqlalchemy.sql.sqltypes import Boolean, DateTime, Float, String, DateTime, Text
 from marshmallow import Schema, fields
 
 
@@ -28,16 +26,16 @@ class PharmaciesModel(Base):
 
     __tablename__ = 'PHARMACIES'
 
-    uuid = Column(String, primary_key=True)
-    name = ''
-    city = ''
+    UUID = Column(String, primary_key=True)
+    NAME = Column(String)
+    CITY = Column(String)
 
 
 class PharmaciesSchema(Schema):
 
-    uuid = fields.String()
-    name = fields.String()
-    city = fields.String()
+    UUID = fields.String()
+    NAME = fields.String()
+    CITY = fields.String()
 
 
 class UsersModel(Base):
@@ -45,11 +43,32 @@ class UsersModel(Base):
     __tablename__ = 'users'
 
     UUID = Column(String, primary_key=True)
-    USERNAME = Column(String)
+    USERNAME = Column(Text)
+    PASSWORD = Column(String)
 
 
 class UsersSchema(Schema):
 
-    uuid = fields.String()
-    username = fields.String()
-    password = fields.String()
+    UUID = fields.String()
+    USERNAME = fields.String()
+    PASSWORD = fields.String()
+
+
+class TransactionsModel(Base):
+
+    __tablename__ = 'TRANSACTIONS'
+
+    UUID = Column(String, primary_key=True)
+    PATIENT_UUID = Column(String, ForeignKey("PatientsModel.UIID"))
+    PHARMACY_UUID = Column(String, ForeignKey("PharmaciesModel.UIID"))
+    AMOUNT = Column(Float)
+    TIMESTAMP = Column(DateTime)
+
+
+class TransactionsSchema(Schema):
+
+    UUID = fields.String()
+    PATIENT_UUID = fields.String()
+    PHARMACY_UUID = fields.String()
+    AMOUNT = fields.Float()
+    TIMESTAMP = fields.String()
