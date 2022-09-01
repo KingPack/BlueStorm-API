@@ -5,33 +5,26 @@ from flask import Response
 from .ext import database2
 # from .ext import doc_swagger
 
-from .models.core import PatientsModel, PatientsSchema 
+from .models.core import PatientsModel, PatientsSchema, PharmaciesSchema, TransactionsModel, TransactionsSchema, UsersModel, PharmaciesModel, UsersSchema
 
 #----------------------------------------------------------------------------#
 # Initialize app and set config
 
 def create_app():
     schema_patients = PatientsSchema(many=True)
-    db = database2.SessionLocal()
+    schema_pharmacies = PharmaciesSchema(many=True)
+    schema_users = UsersSchema(many=True)
+    schema_transactions = TransactionsSchema(many=True)
+    
     
     app = Flask(__name__)
-
-    @app.route("/")
-    def hello_world():
-        return "<p>Hello, World!</p>"
-
-    # app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
     # cors.init_app(app)
-    # resources.init_app(app)app
+    # resources.init_app(app)
+    app.config['JSON_AS_ASCII'] = False
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    db = database2.SessionLocal()
+    
 
-    @app.route('/patients/', methods=['GET'])
-    def index():
-        all_patients_query = db.query(PatientsModel).all()
-        print(all_patients_query[0].UUID)
-        all_patients_json = schema_patients.dump(all_patients_query)
-
-        return jsonify(all_patients_json)
 
     return app
 
