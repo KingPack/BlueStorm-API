@@ -12,21 +12,15 @@ from .models.core import PatientsModel, PatientsSchema, PharmaciesSchema, Transa
 # Initialize app and set config
 
 def create_app():
-    schema_patients = PatientsSchema(many=True)
-    schema_pharmacies = PharmaciesSchema(many=True)
-    schema_users = UsersSchema(many=True)
-    schema_transactions = TransactionsSchema(many=True)
-    
-    
-    app = Flask(__name__)
-    resources.init_app(app)
 
-    # cors.init_app(app)
+    app = Flask(__name__)
+
     app.config['JSON_AS_ASCII'] = False
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db = database2.SessionLocal()
     
-
+    resources.init_app(app)
+    # cors.init_app(app)
 
     return app 
 
