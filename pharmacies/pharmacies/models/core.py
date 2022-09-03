@@ -1,4 +1,4 @@
-from ..ext.database2 import Base
+from ..ext.database import Base
 from sqlalchemy import Column, Integer, ForeignKey
 from sqlalchemy.sql.sqltypes import Boolean, DateTime, Float, String, DateTime, Text
 from marshmallow import Schema, fields
