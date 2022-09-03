@@ -1,0 +1,24 @@
+tags:
+- "Article"
+summary: "Mostrar Farmacias"
+description: "Essa rota retorna os dados de todas as farmacias."
+produces:
+- "application/json"
+parameters:
+  - name: "name"
+    in: "path"
+    minimum: 1
+    type: "integer"
+
+responses:
+  "200":
+    description: "Artigo excluido com sucesso."
+  "404":
+    description: "Falha de requisição"
+    schema:
+      type: "object"
+      properties:
+        Mensagem:
+          type: "string"
+        Adicional:
+          type: "string"
