@@ -1,9 +1,13 @@
 tags:
 - "Transações"
-summary: "Mostrar todos as Transações."
-description: "Essa rota retorna os dados de todas as transações."
+summary: "Filtrar Transações"
+description: "Essa rota filtra transações."
 produces:
 - "application/json"
+parameters:
+  - name: "Transação"
+    in: "path"
+    type: "string"
 
 responses:
   "200":
