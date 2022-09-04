@@ -1,0 +1,19 @@
+tags:
+- "Farmacias"
+summary: "Mostrar todos as farmacias cadastradas."
+description: "Essa rota retorna os dados de todas as farmacias."
+produces:
+- "application/json"
+
+responses:
+  "200":
+    description: "Filtro aplicado"
+  "404":
+    description: "Falha de requisição"
+    schema:
+      type: "object"
+      properties:
+        mensagem:
+          type: "string"
+        status_code:
+          type: "integer"

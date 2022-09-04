@@ -1,7 +1,14 @@
-from ..ext.database2 import Base
-from sqlalchemy import Column, Integer, ForeignKey
-from sqlalchemy.sql.sqltypes import Boolean, DateTime, Float, String, DateTime, Text
-from marshmallow import Schema, fields
+from ..ext.database import Base
+
+from sqlalchemy import Column, ForeignKey
+
+from sqlalchemy.sql.sqltypes import DateTime
+from sqlalchemy.sql.sqltypes import String
+from sqlalchemy.sql.sqltypes import Float
+from sqlalchemy.sql.sqltypes import Text
+
+from marshmallow import Schema
+from marshmallow import fields
 
 
 class PatientsModel(Base):

@@ -1,0 +1,19 @@
+tags:
+- "Transações"
+summary: "Mostrar todos as Transações."
+description: "Essa rota retorna os dados de todas as transações."
+produces:
+- "application/json"
+
+responses:
+  "200":
+    description: "Filtro aplicado"
+  "404":
+    description: "Falha de requisição"
+    schema:
+      type: "object"
+      properties:
+        mensagem:
+          type: "string"
+        status_code:
+          type: "integer"

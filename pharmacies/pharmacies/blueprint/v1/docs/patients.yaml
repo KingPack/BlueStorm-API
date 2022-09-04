@@ -1,0 +1,19 @@
+tags:
+- "Pacientes"
+summary: "Mostrar todos os pacientes cadastrados."
+description: "Essa rota retorna os dados de todos os pacientes."
+produces:
+- "application/json"
+
+responses:
+  "200":
+    description: "Filtro aplicado"
+  "404":
+    description: "Falha de requisição"
+    schema:
+      type: "object"
+      properties:
+        mensagem:
+          type: "string"
+        status_code:
+          type: "integer"

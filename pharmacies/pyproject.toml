@@ -10,6 +10,8 @@ Flask = "^2.2.2"
 SQLAlchemy = "^1.4.40"
 marshmallow = "^3.17.1"
 psycopg2-binary = "^2.9.3"
+flasgger = "^0.9.5"
+flake8 = "^5.0.4"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"

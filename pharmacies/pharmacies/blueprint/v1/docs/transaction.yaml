@@ -1,0 +1,23 @@
+tags:
+- "Transações"
+summary: "Filtrar Transações"
+description: "Essa rota filtra transações."
+produces:
+- "application/json"
+parameters:
+  - name: "Transação"
+    in: "path"
+    type: "string"
+
+responses:
+  "200":
+    description: "Filtro aplicado"
+  "404":
+    description: "Falha de requisição"
+    schema:
+      type: "object"
+      properties:
+        mensagem:
+          type: "string"
+        status_code:
+          type: "integer"

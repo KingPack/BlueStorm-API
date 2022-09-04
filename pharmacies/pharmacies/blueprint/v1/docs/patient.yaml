@@ -1,0 +1,23 @@
+tags:
+- "Pacientes"
+summary: "Filtrar Pacientes"
+description: "Essa rota filtra por nome de possiveis pacientes."
+produces:
+- "application/json"
+parameters:
+  - name: "name"
+    in: "path"
+    type: "string"
+
+responses:
+  "200":
+    description: "Filtro aplicado"
+  "404":
+    description: "Falha de requisição"
+    schema:
+      type: "object"
+      properties:
+        mensagem:
+          type: "string"
+        status_code:
+          type: "integer"

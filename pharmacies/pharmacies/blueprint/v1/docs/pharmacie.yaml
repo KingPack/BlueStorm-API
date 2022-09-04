@@ -1,0 +1,23 @@
+tags:
+- "Farmacias"
+summary: "Filtrar farmacia"
+description: "Essa rota filtra por possiveis farmacias."
+produces:
+- "application/json"
+parameters:
+  - name: "farmacias"
+    in: "path"
+    type: "string"
+
+responses:
+  "200":
+    description: "Filtro aplicado"
+  "404":
+    description: "Falha de requisição"
+    schema:
+      type: "object"
+      properties:
+        mensagem:
+          type: "string"
+        status_code:
+          type: "integer"
