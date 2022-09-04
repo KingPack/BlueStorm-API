@@ -87,7 +87,10 @@ def transactions():
 def transaction_filter(transaction):
     query_transaction = db.query(TransactionsModel).filter(
         TransactionsModel.NAME.ilike(f'%{transaction.upper()}%')).all()
-
     json_transaction = schema_transactions.dump(query_transaction)
+
+    for transaction in query_transaction:
+        ...
+
     db.close()
     return jsonify(json_transaction)
