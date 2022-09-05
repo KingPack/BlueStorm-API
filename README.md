@@ -4,7 +4,10 @@ Projeto desenvolvido com base na entrevista tecnica na empresa BlueStorm
 
 ## Dockerfile
 
-bash
-´´´
-sudo docker run -d -p 8001:8001 7a86 
-´´´
+No diretorio raiz do projeto, execute os seguintes comandos
+
+```bash
+sudo docker build .
+
+sudo docker run -d -p 8001:8001 <CONTAINER_ID> 
+```
