@@ -1,5 +1,5 @@
 from flasgger import Swagger
-from flasgger import swag_from
+from flasgger import swag_from  # noqa: F401
 
 
 swagger_template = {
@@ -8,7 +8,7 @@ swagger_template = {
     "operationId": "getmyData",
     "info": {
             "title": "API Farmacias",
-            "description": "API de filtro de dados para farmacias.", 
+            "description": "API de filtro de dados para farmacias.",
             "version": "1.0.0",
             'contact': {'url': "https://github.com/KingPack"},
             }
@@ -45,5 +45,5 @@ def init_app(app):
         'uiversion': 3,
         }
 
-    swagger = Swagger(app, config=swagger_config,
+    swagger = Swagger(app, config=swagger_config,       # noqa: F841
                       template=swagger_template, validation_function=True)

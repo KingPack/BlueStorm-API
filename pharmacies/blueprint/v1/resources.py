@@ -20,6 +20,10 @@ schema_patients = PatientsSchema(many=True)
 schema_pharmacies = PharmaciesSchema(many=True)
 schema_transactions = TransactionsSchema(many=True)
 
+schema_patient = PatientsSchema(many=False)
+schema_pharmacy = PharmaciesSchema(many=False)
+schema_transaction = TransactionsSchema(many=False)
+
 
 def init_app(app):
     app.register_blueprint(bp)
@@ -41,7 +45,7 @@ def patients():
     return jsonify(json_patients), status_code
 
 
-@bp.route('/patients/<string:name>/', methods=['GET'])
+@bp.route('/patients/<string:name>', methods=['GET'])
 @swag_from('docs/patient.yaml')
 def patients_filter(name):
     query_patient = db.query(PatientsModel).filter(
@@ -62,32 +66,52 @@ def pharmacies():
     return jsonify(json_pharmacies)
 
 
-@bp.route('/pharmacies/<string:pharmacie>', methods=['GET'])
-@swag_from('docs/pharmacie.yaml')
-def pharmacies_filter(pharmacie):
+@bp.route('/pharmacies/<string:pharmacy>', methods=['GET'])
+@swag_from('docs/pharmacy.yaml')
+def pharmacies_filter(pharmacy):
     query_pharmacies = db.query(PharmaciesModel).filter(
-        PharmaciesModel.NAME.ilike(f'%{pharmacie.upper()}%')).all()
+        PharmaciesModel.NAME.ilike(f'%{pharmacy.upper()}%')).all()
 
     json_pharmacies = schema_pharmacies.dump(query_pharmacies)
     db.close()
     return jsonify(json_pharmacies)
 
 
-@bp.route('/transactions/', methods=['GET'])
-@swag_from('docs/transactions.yaml')
-def transactions():
-    query_transactions = db.query(TransactionsModel).all()
-    json_transactions = schema_transactions.dump(query_transactions)
-    db.close()
-    return jsonify(json_transactions)
-
-
 @bp.route('/transactions/<string:transaction>', methods=['GET'])
 @swag_from('docs/transaction.yaml')
-def transaction_filter(transaction):
-    query_transaction = db.query(TransactionsModel).filter(
-        TransactionsModel.NAME.ilike(f'%{transaction.upper()}%')).all()
-
-    json_transaction = schema_transactions.dump(query_transaction)
+def transaction(transaction):
+    query_transactions = db.query(TransactionsModel).filter(
+        TransactionsModel.UUID.ilike(f'%{transaction.upper()}%')).all()
+    json_transaction = schema_transactions.dump(query_transactions)
     db.close()
     return jsonify(json_transaction)
+
+
+@bp.route('/transactions/', methods=['GET'])
+@swag_from('docs/transactions.yaml')
+def transaction_filter():
+
+    query_transactions = db.query(
+        TransactionsModel, PatientsModel, PharmaciesModel).filter(
+        TransactionsModel.PATIENT_UUID == PatientsModel.UUID).filter(
+        TransactionsModel.PHARMACY_UUID == PharmaciesModel.UUID).all()
+
+    # TODO: Juntar e organizar o schema para inserir as relações
+    list_transactions = []
+    for transaction, patient, pharmacy in query_transactions:
+        json_transaction = schema_transaction.dump(transaction)
+        json_patient = schema_patient.dump(patient)
+        json_pharmacy = schema_pharmacy.dump(pharmacy)
+
+        transaction_combination = {
+            'id': int(json_transaction['UUID'][4:]),
+            'Transaction': json_transaction,
+            'Patient': json_patient,
+            'Pharmacy': json_pharmacy
+            }
+        list_transactions.append(transaction_combination)
+
+    sorted(list_transactions, key=lambda id: id['id'])
+
+    db.close()
+    return jsonify(list_transactions)

@@ -1,6 +1,7 @@
 from ..ext.database import Base
 
-from sqlalchemy import Column, ForeignKey
+from sqlalchemy import Column
+from sqlalchemy import ForeignKey
 
 from sqlalchemy.sql.sqltypes import DateTime
 from sqlalchemy.sql.sqltypes import String
@@ -32,7 +33,6 @@ class PatientsSchema(Schema):
 class PharmaciesModel(Base):
 
     __tablename__ = 'PHARMACIES'
-
     UUID = Column(String, primary_key=True)
     NAME = Column(String)
     CITY = Column(String)
@@ -66,8 +66,8 @@ class TransactionsModel(Base):
     __tablename__ = 'TRANSACTIONS'
 
     UUID = Column(String, primary_key=True)
-    PATIENT_UUID = Column(String, ForeignKey("PatientsModel.UIID"))
-    PHARMACY_UUID = Column(String, ForeignKey("PharmaciesModel.UIID"))
+    PATIENT_UUID = Column(String, ForeignKey("PATIENTS.UIID"))
+    PHARMACY_UUID = Column(String, ForeignKey("PHARMACIES.UIID"))
     AMOUNT = Column(Float)
     TIMESTAMP = Column(DateTime)
 
@@ -79,3 +79,5 @@ class TransactionsSchema(Schema):
     PHARMACY_UUID = fields.String()
     AMOUNT = fields.Float()
     TIMESTAMP = fields.String()
+    PATIENT = fields.Nested(PatientsSchema, many=False)
+    PHARMACIE = fields.Nested(PharmaciesSchema, many=False)
