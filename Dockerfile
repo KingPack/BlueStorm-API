@@ -25,10 +25,8 @@ ENV PYTHONUNBUFFERED=1 \
     PYSETUP_PATH="/opt/pysetup" \
     VENV_PATH="/opt/pysetup/.venv"
 
-
 # prepend poetry and venv to path
 ENV PATH="$POETRY_HOME/bin:$VENV_PATH/bin:$PATH"
-
 
 # `builder-base` stage is used to build deps + create our virtual environment
 RUN apt-get update \
@@ -43,35 +41,20 @@ RUN curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poet
 
 # copy project requirement files here to ensure they will be cached.
 WORKDIR $PYSETUP_PATH
+
 COPY poetry.lock pyproject.toml ./
 
 # install runtime deps - uses $POETRY_VIRTUALENVS_IN_PROJECT internally
 RUN poetry install --no-dev
 
-
-
-# WORKDIR $PYSETUP_PATH
-
-# RUN poetry shell
-
-# quicker install as runtime deps are already installed
 RUN poetry install
 
-# will become mountpoint of our code
-# WORKDIR $PYSETUP_PATH
-# COPY .venv ./
-
-# ENV FLASK_APP pharmacies/main.py
-
-
-
 WORKDIR /app
+
 ENV FLASK_APP pharmacies/main.py
 
-# CMD ["poetry", "shell"]
 COPY . .
 
 EXPOSE 8001
 
 CMD ["gunicorn", "-b", "0.0.0.0:8001", "pharmacies.wsgi:create_app()"]
-
