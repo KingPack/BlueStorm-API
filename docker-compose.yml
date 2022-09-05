@@ -1,0 +1,12 @@
+version: '3.10'
+
+services:
+  web:
+    build: ./pharmacies
+    command: gunicorn -b  pharmacies.wsgi
+    volumes:
+      - ./pharmacies/:/usr/src/app/
+    ports:
+      - 5000:5000
+    env_file:
+      - ./.env.dev
