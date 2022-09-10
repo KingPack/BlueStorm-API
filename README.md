@@ -60,7 +60,7 @@ Agora vamos fazer o clone do projeto.
 ```bash
 # Fazendo o clone do projeto
 
-$ t clone git@github.com:KingPack/api.git
+$ git clone git@github.com:KingPack/api.git
 
 # Liste o diretório para ver e entrar no projeto
 
