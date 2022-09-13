@@ -1,25 +1,23 @@
-# api_bluestorm
+# API_Pharmacies
 
-Projeto desenvolvido com base na entrevista tecnica na empresa BlueStorm
+API desenvolvida para visualização dos dados de farmacias.
 
-## Projeto API REST PRIVADA
+## Projeto API REST
 
-Objetivo do projeto é de criar uma api rest privada para a clinica que está em busca de um sistema crud para obter informações do banco de dados.
+Objetivo do projeto é de criar uma api rest privada para gerenciar a farmacia que está em busca de dados de (pacientes, farmacias e transações).
 
 - [Poetry](https://python-poetry.org/docs/)
 - [Git](https://git-scm.com)
 - [Python 3](https://www.python.org/downloads/)
 - [Flask](https://flask.palletsprojects.com/en/2.0.x/quickstart/)
 - [Gunicorn](https://gunicorn.org)
-- [Postgres](https://www.postgresql.org)
-- [Heroku](heroku.com)
 - [Docker](https://www.docker.com)
 - [Flasgger](https://github.com/flasgger/flasgger)
 - [SQLAlchemy](https://docs.sqlalchemy.org/en/14/)
 - [Marshmallow](https://marshmallow.readthedocs.io/en/stable/)
 - [Flake8](https://flake8.pycqa.org/en/latest/)
 
-## Requisitos 
+## Requisitos  (Linux)
 Para rodar esse projeto na sua máquina você irá precisar instalar alguns programas, mas não se preocupe nós vamos ajudar você a executa-lo em sua maquina.
 
 ### 1º Poetry
@@ -28,7 +26,7 @@ Para a instalação do  [Poetry](https://python-poetry.org/docs/)
 
 ### 2º Python 3
 
-Você deve instalar a versão 3.9.10 ou superior do [Python](https://www.python.org/downloads/).
+Você deve instalar a versão 3.10 ou superior do [Python](https://www.python.org/downloads/).
 Caso não tenha [pyenv](https://dev.to/womakerscode/instalando-o-python-com-o-pyenv-2dc7) talvez esse artigo possa ajuda-lo com problemas futuros.
 
 ### 3º Git
@@ -52,7 +50,7 @@ $ pwd
 
 # E nesse diretório que vamos colocar nosso projeto
 
-$ /home/projeto/Documents/GitHub/projeto_api
+$ /home/projeto/Documents/GitHub/api
 ```
 
 Agora vamos fazer o clone do projeto.
@@ -62,23 +60,12 @@ Agora vamos fazer o clone do projeto.
 
 $ git clone git@github.com:KingPack/api.git
 
-# Liste o diretório para ver e entrar no projeto
-
-$ ls | grep api
-
-# retorno 
-
-$ api.git
-
-# Entre no repositorio
-
-$ cd api
 ```
 
-### Se você chegou ate aqui sem erros, então já devemos estar preparados para inicializar o ambiente virtual do Poetry.
+### inicializar o ambiente virtual do Poetry.
 
 ```bash
-# comando para entrar no ambiente do poetry
+# comando para entrar no ambiente virtual.
 $ poetry shell
 ```
 
@@ -86,21 +73,18 @@ Apos inicializar o ambiente virtual, vamos atualizar o poetry.
 
 ```bash
 $ poetry update
-```
-apos isso, vamo executar 
 
-```bash
 # comando para instalar todas as dependencias do projeto
 $ poetry install
 ```
 
 Pode demorar um pouco para instalar todas as dependências. Então vamos esperar um pouco.
 
-### Feito isso está tudo pronto para executar o programa.
+### Executando a API
 
-Antes de executar não esqueca das variaveis de ambiente , caso tenha esquecido execute:
+Variaveis de ambiente
 ```bash
-# comando para configurar as variaveis de ambiente 
+# Variaveis de ambiente 
 $ export FLASK_APP=api
 $ export FLASK_ENV=development
 ```
@@ -112,7 +96,7 @@ $ flask run
 Se tudo deu certo então voce terá um resultado parecido com esse:
 
 Output
- * Serving Flask app "api_rest" (lazy loading)
+ * Serving Flask app "app" (lazy loading)
  * Environment: development
  * Debug mode: on
  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
