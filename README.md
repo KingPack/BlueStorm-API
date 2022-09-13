@@ -85,23 +85,42 @@ Pode demorar um pouco para instalar todas as dependências. Então vamos esperar
 Variaveis de ambiente
 ```bash
 # Variaveis de ambiente 
-$ export FLASK_APP=api
-$ export FLASK_ENV=development
+$ export FLASK_APP=pharmacies.main.py
+$ export FLASK_DEBUG=True
 ```
 
 ```bash
 # comando para executar o projeto
 $ flask run
-```
-Se tudo deu certo então voce terá um resultado parecido com esse:
 
 Output
- * Serving Flask app "app" (lazy loading)
- * Environment: development
+ * Serving Flask app 'pharmacies.main.py'
  * Debug mode: on
- * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on http://127.0.0.1:5000
+Press CTRL+C to quit
  * Restarting with stat
  * Debugger is active!
- * Debugger PIN: 813-894-335
+ * Debugger PIN: 960-628-982
+ ```
+ ## Documentação da API
  
- ## Parabens por executar o projeto com sucesso!
+ Documentação das rotas ativas na API: http://localhost:5000/v1/documentation/
+
+### JWT (Autenticação)
+
+
+### Flask-Login (Extenção Flask)
+ 
+
+## Docker
+
+Para iniciar a imagem docker use na raiz do projeto
+
+```bash
+sudo docker build .
+
+Successfully built e9974939d23f
+```
+
+http://localhost:8001/v1/documentation/
